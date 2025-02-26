@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be Mine? 💖</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+            padding: 50px;
+            overflow: hidden;
+        }
+        .card, .retry-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: inline-block;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: transform 0.2s ease;
+        }
+        .yes { background: #ff4d4d; color: white; }
+        .no { background: #ccc; color: black; position: absolute; }
+        .retry-card {
+            display: none;
+            margin-top: 20px;
+        }
+        .particle, .confetti, .heart, .sad {
+            position: absolute;
+            opacity: 0.8;
+        }
+        .particle {
+            background: gold;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: floatUp 2s linear;
+        }
+        .confetti {
+            width: 10px;
+            height: 20px;
+            background: red;
+            animation: fall 2s linear;
+        }
+        .heart {
+            font-size: 24px;
+            animation: riseUp 3s linear;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0); opacity: 1; }
+            100% { transform: translateY(300px) rotate(360deg); opacity: 0; }
+        }
+        @keyframes riseUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-150px); opacity: 0; }
+        }
+    </style>
+    <script>
+        function teleportButton(button) {
+            let maxWidth = window.innerWidth - 100;
+            let maxHeight = window.innerHeight - 50;
+            button.style.left = Math.random() * maxWidth + "px";
+            button.style.top = Math.random() * maxHeight + "px";
+        }
+
+        function noClicked(event) {
+            document.getElementById("retry-card").style.display = "block";
+            document.getElementById("retry-text").innerText = "Now will you be my girlfriend? 😏";
+
+            let noButtons = document.querySelectorAll('.no');
+            noButtons.forEach(button => teleportButton(button));
+
+            createSadFace(event.clientX, event.clientY);
+        }
+
+        function yesClicked() {
+            document.getElementById("retry-card").style.display = "block";
+            document.getElementById("retry-text").innerText = "Can I flex you? 😏";
+            
+            // Remove all "No" buttons
+            let noButtons = document.querySelectorAll('.no');
+            noButtons.forEach(button => button.remove());
+
+            createParticles();
+            createConfetti();
+            createHearts();
+        }
+
+        function finalDecision(answer) {
+            if (answer === 'yes') {
+                alert("Yay! I knew you loved me, cutie! ❤️");
+
+                // Remove all "No" buttons
+                let noButtons = document.querySelectorAll('.no');
+                noButtons.forEach(button => button.remove());
+
+                createParticles();
+                createConfetti();
+                createHearts();
+            } else {
+                alert("Please, cutie! 🥺");
+            }
+        }
+
+        function createParticles() {
+            for (let i = 0; i < 15; i++) {
+                let particle = document.createElement("div");
+                particle.className = "particle";
+                particle.style.left = Math.random() * window.innerWidth + "px";
+                particle.style.top = Math.random() * window.innerHeight + "px";
+                document.body.appendChild(particle);
+                
+                let animationDuration = Math.random() * 2 + 1 + "s";
+                particle.style.animationDuration = animationDuration;
+
+                setTimeout(() => particle.remove(), 2000);
+            }
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 10; i++) {
+                let confetti = document.createElement("div");
+                confetti.className = "confetti";
+                confetti.style.left = i % 2 === 0 ? "0px" : (window.innerWidth - 10) + "px";
+                confetti.style.top = "-100px";
+                confetti.style.backgroundColor = ["red", "blue", "yellow", "green", "purple"][Math.floor(Math.random() * 5)];
+                document.body.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), 2000);
+            }
+        }
+
+        function createHearts() {
+            let heartTypes = ["❤️", "💖", "💘", "💗", "💓", "💞", "💕"];
+            for (let i = 0; i < 15; i++) {
+                let heart = document.createElement("div");
+                heart.className = "heart";
+                heart.innerHTML = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.bottom = "-50px";
+                heart.style.position = "absolute";
+                heart.style.fontSize = Math.random() * 20 + 20 + "px";
+                document.body.appendChild(heart);
+
+                let animationDuration = Math.random() * 3 + 2 + "s";
+                heart.style.animationDuration = animationDuration;
+
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+
+        function createSadFace(x, y) {
+            let sadFace = document.createElement("div");
+            sadFace.className = "sad";
+            sadFace.innerHTML = "🥺";
+            sadFace.style.left = x + "px";
+            sadFace.style.top = y + "px";
+            sadFace.style.position = "absolute";
+            sadFace.style.fontSize = "30px";
+            document.body.appendChild(sadFace);
+
+            setTimeout(() => sadFace.remove(), 2000);
+        }
+    </script>
+</head>
+<body>
+    <div class="card">
+        <h1>Hey [Sanyyuuu],</h1>
+        <p>I have something special to ask you... 💕</p>
+        <h2>Will you be my girlfriend? 🥰</h2>
+        <button class="btn yes" onclick="yesClicked()">Yes</button>
+        <button class="btn no" onclick="noClicked(event)">No</button>
+    </div>
+    
+    <div id="retry-card" class="retry-card">
+        <h2 id="retry-text">Please think again? 🥺</h2>
+        <button class="btn yes" onclick="finalDecision('yes')">Yes</button>
+        <button class="btn no" onclick="noClicked(event)">No</button>
+    </div>
+</body>
+</html>
